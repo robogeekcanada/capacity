@@ -50,6 +50,8 @@ def calculate_spare_SPCs(Shifts, Max_shifts, hours_shift, t):
     for s in Shifts.values():
         total += s.varValue
 
+    print(t,total)
+
     #SPC 50% of 12 pack rate
     return (int(sum(Max_shifts) - total)*hours_shift*t*0.5)    
 
@@ -91,7 +93,10 @@ def test_rates_20years(test_rates, initial_rate, Max_rate, Rates, Skus, Periods,
                 Rates_test[i][j] = Rates[i][j]*factor
 
         rate_t = project_20years(Demand, Skus, Periods, growth, Rates_test, t, hours_shift, Max_shifts, year0 =2023)
-        matrix.append(( (str(t/Max_rate*100) + '%'), rate_t))
+
+
+        
+        matrix.append(( (str(int(t/Max_rate*100)) + '%'), rate_t))
 
 
     #print(dict(matrix))        
