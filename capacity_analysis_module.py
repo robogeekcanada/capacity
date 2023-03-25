@@ -50,7 +50,7 @@ def calculate_spare_SPCs(Shifts, Max_shifts, hours_shift, t):
     for s in Shifts.values():
         total += s.varValue
 
-    print(t,total)
+    #print(t,total)
 
     #SPC 50% of 12 pack rate
     return (int(sum(Max_shifts) - total)*hours_shift*t*0.5)    
@@ -111,6 +111,18 @@ def _color_red_or_green(val):
     return['background-color: red' if val else 'background-color: green' for val in is_red]
 
 
+
+
+def color_code(df, title=""):
+
+    f = lambda v: "font-weight:bold; color:black; background-color:orange" if v=='65.0%' else "font-weight:normal;"
+    styles = [dict(selector="caption", props=[("font-size", "120%"),("font-weight", "bold")])]
+
+    df_styled = df.style.apply(_color_red_or_green).format('{:,.0f}').set_caption(title).applymap_index(f, axis=0).set_table_styles(styles)
+    return df_styled
+    
+
+""""
 def main():
     #LOAD DATA
 
@@ -212,5 +224,5 @@ if __name__ == '__main__':
 
     main()
 
-
+"""
     
